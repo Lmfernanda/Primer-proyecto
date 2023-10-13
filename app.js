@@ -1,16 +1,14 @@
-//Obteniendo la información por medio del DOM y los IDs
-//Campos compartidos entre pacientes y medicos
 const nombres = document.getElementById("nombres");
 const apellidos = document.getElementById("apellidos");
 const cedula = document.getElementById("cedula");
 const telefono = document.getElementById("telefono");
 const especialidad = document.getElementById("especialidad");
-//Campos propios de los medicos
+// Medicos
 const consultorio = document.getElementById("consultorio");
 const correo = document.getElementById("correo");
-//Campos propios de los pacientes
+// Pacientes
 const edad = document.getElementById("edad");
-//Llamado de los formularios
+// Formularios
 const formularioMedicos = document.getElementById("registro-medicos-form");
 const formularioPacientes = document.getElementById("registro-pacientes-form");
 
@@ -33,7 +31,7 @@ const mostrarMedicos = function () {
   }
   medicos.forEach((medico) => {
     let fila = document.createElement("tr");
-    //Para crear celda DOM tiene un metodo que es insertCell()
+
     let celdaNombres = fila.insertCell();
     let celdaApellidos = fila.insertCell();
     let celdaCedula = fila.insertCell();
@@ -65,7 +63,7 @@ const mostrarPacientes = function () {
   }
   pacientes.forEach((paciente) => {
     let fila = document.createElement("tr");
-    //Para crear celda DOM tiene un metodo que es insertCell()
+
     let celdaNombres = fila.insertCell();
     let celdaApellidos = fila.insertCell();
     let celdaCedula = fila.insertCell();
@@ -86,7 +84,6 @@ const mostrarPacientes = function () {
   });
 };
 
-//Unicamente ejecuta la funcion cuando estamos ubicados en listado-medicos.html
 if (window.location.href.endsWith("listado-medicos.html")) {
   mostrarMedicos();
 }
@@ -95,11 +92,8 @@ if (window.location.href.endsWith("listado-pacientes.html")) {
   mostrarPacientes();
 }
 
-//Unicamente ejecuta el addEventListener cuando estamos ubicados en registro-medicos.html
 if (window.location.href.endsWith("registro-medicos.html")) {
-  //El evento para formularioMedicos va a ser de tipo enviar o guardar es decir submit
   formularioMedicos.addEventListener("submit", function (event) {
-    //Previene que la pagina se recargue sin antes hacer la logica del addEventListener
     event.preventDefault();
 
     let valorNombres = nombres.value;
@@ -124,7 +118,7 @@ if (window.location.href.endsWith("registro-medicos.html")) {
     let medicos = [];
 
     let localMedicos = localStorage.getItem("medicos");
-    //Si localMeeicos no esta vacio lo convierte en objeto para hacer el push
+
     if (localMedicos) {
       medicos = JSON.parse(localMedicos);
     }
@@ -134,11 +128,11 @@ if (window.location.href.endsWith("registro-medicos.html")) {
   });
 }
 
-// Acceso al formulario registro pacientes
+
 if (window.location.href.endsWith("registro-pacientes.html")) {
-  //El evento para formularioMedicos va a ser de tipo enviar o guardar es decir submit
+
   formularioPacientes.addEventListener("submit", function (event) {
-    //Previene que la pagina se recargue sin antes hacer la logica del addEventListener
+
     event.preventDefault();
 
     let valorNombres = nombres.value;
@@ -160,12 +154,12 @@ if (window.location.href.endsWith("registro-pacientes.html")) {
     let pacientes = [];
 
     let localPacientes = localStorage.getItem("pacientes");
-    //Si localPacientes no esta vacio lo convierte en objeto para hacer el push
+
     if (localPacientes) {
       pacientes = JSON.parse(localPacientes);
     }
     pacientes.push(paciente);
-    //Guardar la información de pacientes en el localStorage
+
     localStorage.setItem("pacientes", JSON.stringify(pacientes));
     alert("Paciente registrado!");
   });
